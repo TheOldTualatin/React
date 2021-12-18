@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable">
+</head>
+<body>
+<script>
+    //展开数组
+    let arr1 = [1,3,4];
+    let arr2 = [1,2,3];
+    console.log(...arr1);
+    //拼接数组
+    let arr3 = [...arr1,...arr2];
+//    函数传参
+    function sum(...numbs)
+    {
+        return numbs.reduce((preValue,currentValue)=>prevalue+currentValue)
+    }
+    console.log(sum([1,2,3,4]));
+    let person ={name:"tom",age:18};
+    let person2 = {...person};
+</script>
+</body>
+</html>

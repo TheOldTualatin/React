@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable">
+</head>
+<body>
+<script>
+    "use strict";
+//   创建一个Person类
+    class Person
+    {
+        name;
+        age;
+        constructor(name,age)
+        {
+            this.name = name;
+            this.age = age;
+        }
+
+        speak()
+        {
+            console.log(`我叫${this.name},我今年${(this.age)}`)
+        }
+    }
+//  创建一个Person的实例对象
+    let person = new Person("jeck","18");
+    person.speak();
+//    创建一个Student类继承Person类
+    class Student extends Person
+    {
+        grade;
+        constructor(name,age,grade)
+        {
+            super(name,age);
+            this.grade = grade;
+        }
+        speak()
+        {
+            console.log(`我是一个学生，我叫${this.name},今年${this.age}岁`);
+        }
+    }
+    let student = new Student("tom","10")
+    student.speak();
+</script>
+</body>
+</html>

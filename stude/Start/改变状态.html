@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable">
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <h1 id="test"></h1>
+    <script type="text/babel">
+        class Weather extends React.Component
+        {
+            constructor(props)
+            {
+                super(props);
+                this.state = {isHot:false};
+                this.changeWeather = this.changeWeather.bind(this);
+            }
+
+            render()
+            {
+                return (<h1 onClick={this.changeWeather}>今天真{this.state.isHot?'炎热':'凉爽'}</h1>)
+            }
+
+            changeWeather()
+            {
+                //state状态不能直接更改，要借助setState更改,更改为替换操作不是更改操作
+                this.setState({isHot: !this.state.isHot});
+            }
+        }
+        //使用标签，不能使用类
+        ReactDOM.render(<Weather/>,document.querySelector("#test"));
+    </script>
+</body>
+</html>
