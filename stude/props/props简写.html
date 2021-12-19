@@ -29,6 +29,11 @@
             sex:"不难不女",
             age:18,
         };
+        //如果使用了构造器，必须将props传递给父类构造器
+        constructor(props)
+        {
+            super(props);
+        }
         render()
         {
             const {name,gender,age,speak} = this.props;

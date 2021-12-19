@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable">
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!--    用于对组件标签属性进行限制-->
+    <script src ="https://unpkg.com/prop-types@15.6/prop-types.min.js" ></script>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/babel">
+    "use strict";
+    /**
+     * 函数组件只能使用三大属性的props属性，因为函数没有实例，但是可以接收参数
+     */
+    function Person(props)
+    {
+        const {name,age,gender}=props;
+        return (
+
+            <ul>
+                <li>name:{name}</li>
+                <li>age:{age}</li>
+                <li>gender:{gender}</li>
+            </ul>
+        );
+    }
+    Person.prototypes = {
+        name:PropTypes.string.isRequired,
+        sex:PropTypes.string,
+        age: PropTypes.number,
+        speak:PropTypes.func,
+    };
+    Person.defaultProps = {
+        sex:"不难不女",
+        age:18,
+    };
+    ReactDOM.render(<Person name = "jack" age = {18} gender = "女"/>,document.querySelector("#test"));
+</script>
+</body>
+</html>
