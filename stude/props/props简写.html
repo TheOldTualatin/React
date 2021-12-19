@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable">
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!--    用于对组件标签属性进行限制-->
+    <script src ="https://unpkg.com/prop-types@15.6/prop-types.min.js" ></script>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/babel">
+    /**
+     * props是只读的，不能直接进行修改
+     */
+    class Person extends React.Component
+    {
+        static prototypes = {
+            name:PropTypes.string.isRequired,
+            sex:PropTypes.string,
+            age: PropTypes.number,
+            speak:PropTypes.func,
+        };
+        static defaultProps = {
+            sex:"不难不女",
+            age:18,
+        };
+        render()
+        {
+            const {name,gender,age,speak} = this.props;
+            return (
+                <ul>
+                    <li>姓名:{name}</li>
+                    <li>性别:{gender}</li>
+                    <li>年龄:{age}</li>
+                </ul>
+            )
+        }
+    }
+    ReactDOM.render(<Person name = "张三" gender = "男" age = {18} speak = {speak}/>,document.querySelector("#test"));
+    function speak()
+    {
+        console.log("我说话了")
+    }
+</script>
+</body>
+</html>
