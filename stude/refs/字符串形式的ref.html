@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable">
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!--    用于对组件标签属性进行限制-->
+    <script src ="https://unpkg.com/prop-types@15.6/prop-types.min.js" ></script>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/babel">
+    /**
+     * 组件内的标签可以定义ref来标识自己
+     * 字符串形式的ref已经被废弃,效率太低
+     */
+    //创建组件
+    class Dome extends React.Component
+    {
+        render()
+        {
+            return (
+                <div>
+                    <label>
+                        <input  ref = "input1" type="text" placeholder="点击按钮提示数据" />
+                    </label>
+                    <button  onClick={this.showData}>点我提示数据</button>
+                    <label>
+                        <input type="text" placeholder="失去焦点显示数据" onBlur={this.showData2}/>
+                    </label>
+                </div>
+            );
+        }
+        showData = ()=>
+        {
+            const {input1} = this.refs;
+            console.log(input1.value);
+        }
+        showData2 = ()=>
+        {
+            const {input2} = this.refs;
+            console.log(input2.value);
+        }
+    }
+    ReactDOM.render(<Dome/>,document.querySelector("#test"));
+</script>
+</body>
+</html>

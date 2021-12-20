@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable">
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!--    用于对组件标签属性进行限制-->
+    <script src ="https://unpkg.com/prop-types@15.6/prop-types.min.js" ></script>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/babel">
+    //内联函数的形式,ref会被调用两次
+    class Dome extends React.Component
+    {
+        /**
+         * 调用后返回一个容器，该容器可以存储被ref所标识的节点,该容器是"专人专用的",只能存一个
+         * @type {*}
+         */
+        myRef = React.createRef();
+        state = {isHot:false};
+        render()
+        {
+            const {isHot} =this.state;
+            return (
+                <div>
+                    <h2>今天天气很{isHot?"炎热":"凉爽"}</h2>
+                    <label>
+                        {/*<input  ref = {c =>this.input1 = c} type="text" placeholder="点击按钮提示数据" />*/}
+                        <input  ref = {this.myRef} type="text" placeholder="点击按钮提示数据" />
+                    </label>
+                    <button  onClick={this.showData}>点我提示数据</button>
+                    <button onClick={this.changeWeather}>点击改变isHot</button>
+                </div>
+            );
+        }
+
+        showData = ()=>
+        {
+            console.log(this.myRef.current.value);
+        }
+        changeWeather =()=>
+        {
+            const {isHot} = this.state;
+            this.setState({isHot:!isHot});
+        }
+    }
+    ReactDOM.render(<Dome/>,document.querySelector("#test"));
+</script>
+</body>
+</html>
