@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable">
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!--    用于对组件标签属性进行限制-->
+    <script src ="https://unpkg.com/prop-types@15.6/prop-types.min.js" ></script>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/babel">
+    /**
+     * 受控组件:页面中输入类的DOM被维护到State中，等到需要使用时将数据取出
+     */
+    class Login extends React.Component
+    {
+        state = {
+            //用户名
+            username:'',
+            //密码
+            password:''
+        }
+        render()
+        {
+            return (
+                <form onSubmit = {this.handleSubmit}>
+                    用户名:<input onChange = {this.saveUserName} type="text" name="userName"/>
+                    密码:<input onChange = {this.savePassword} type="password" name="password"/>
+                    <button>提交</button>
+                </form>
+            )
+        }
+        saveUserName = (event)=>
+        {
+            //阻止默认事件
+            this.setState({username:event.target.value});
+        }
+        savePassword = (event)=>
+        {
+            this.setState({password:event.target.value});
+        }
+    }
+    ReactDOM.render(<Login/>,document.querySelector("#test"));
+</script>
+</body>
+</html>

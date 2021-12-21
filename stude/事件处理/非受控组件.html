@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable">
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!--    用于对组件标签属性进行限制-->
+    <script src ="https://unpkg.com/prop-types@15.6/prop-types.min.js" ></script>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/babel">
+    class Login extends React.Component
+    {
+        render()
+        {
+            return (
+                <form action="https://www.baidu.com" onSubmit = {this.handleSubmit}>
+                    用户名:<input ref={c=>this.userName = c} type="text" name="userName"/>
+                    密码:<input ref={c=>this.password = c} type="password" name="password"/>
+                    <button>提交</button>
+                </form>
+            )
+        }
+        handleSubmit = (event)=>
+        {
+            const {userName,password} = this;
+            //阻止默认事件
+            event.preventDefault();
+            alert(userName.value);
+        }
+    }
+    ReactDOM.render(<Login/>,document.querySelector("#test"));
+</script>
+</body>
+</html>

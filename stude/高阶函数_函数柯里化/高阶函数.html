@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable">
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!--    用于对组件标签属性进行限制-->
+    <script src ="https://unpkg.com/prop-types@15.6/prop-types.min.js" ></script>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/babel">
+    /**
+     * 函数柯里化：
+     *  通过函数返回函数，实现函数多次接收参数，和实现扩展函数参数
+     */
+    class Login extends React.Component
+    {
+        state = {
+            //用户名
+            username:'',
+            //密码
+            password:''
+        }
+        render()
+        {
+            //加了括号：表示执行函数体的代码，得到该函数的返回值或者函数要实现的功能。
+            //不加括号：表示只是找到这个函数，但不会执行它里面的函数体,所以不能直接将具有括号的函数传入
+            //在这里，saveUserData()的返回值作为回调，而不是saveUserData作为回调
+            //不加括号调用saveUserData，加上saveUserData()为调用返回值
+            return (
+                <form>
+                    用户名:<input onChange = {this.saveUserData("username")} type="text" name="userName"/>
+                    密码:<input onChange = {this.saveUserData("password")} type="password" name="password"/>
+                    <button>提交</button>
+                </form>
+            )
+        }
+        saveUserData = (dataType)=>
+        {
+            console.log(dataType);
+            //返回值被作为回调事件
+            return (e)=>
+            {
+                //使用[]读取变量
+                this.setState({[dataType]:e.target.value});
+            }
+        }
+    }
+    ReactDOM.render(<Login/>,document.querySelector("#test"));
+</script>
+</body>
+</html>
